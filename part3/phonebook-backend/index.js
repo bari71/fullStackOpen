@@ -24,23 +24,27 @@ app.get('/info', (req, res) => {
     res.send(`Phonebook has info for ${persons.length} people<br/>${currTime}`)
 })
 
-app.get('/api/persons/:id', function(req, res) {
-    Person.findById(req.params.id).then(person => {
-        res.json(person)
-    })
+app.get('/api/persons/:id', function(req, res, next) {
+    Person.findById(req.params.id)
+        .then(person => {
+            if (person) {
+                console.log(person)
+                res.json(person)
+            } else {
+                res.status(404).end()
+            }
+        })
+        .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', function(req, res) {
-    const id = req.params.id
-    persons = persons.filter(function(p) {
-        if (p.id !== id) {
-            return true
-        } else {
-            return false
-        }
-    })
-    res.status(204).end()
+app.delete('/api/persons/:id', function(req, res, next) {
+    Person.findByIdAndDelete(request.params.id)
+        .then(res => {
+            res.status(204).end()
+        })
+        .catch(error => next(error))
 })
+
 
 app.post('/api/persons', function(req, res) {
     const body = req.body
@@ -79,6 +83,16 @@ const findMaxNum = () => {
         : 0
     return (String(maxNum + 1))
 }
+
+const errorHandler = (error, req, res, next) => {
+    console.error(error.message)
+    if (error.name === 'CastError') {
+        return res.status(400).send({ error: 'malformed id'})
+    }
+
+    next(error)
+}
+app.use(errorHandler)
 const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

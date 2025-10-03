@@ -1,2 +1,7 @@
-GET http://localhost:3001/api/persons/68df14c9669c508852b7a156
+POST https://phonebook-mo1a.onrender.com/api/persons
 Content-Type: application/json
+
+{
+    "name": "Sasssh",
+    "number": "0444444"
+}
