@@ -24,12 +24,11 @@ app.get('/info', (req, res) => {
     res.send(`Phonebook has info for ${persons.length} people<br/>${currTime}`)
 })
 
-app.get('/api/persons/:id', function(req, res, next) {
-    Person.findById(req.params.id)
-        .then(person => {
-            if (person) {
-                console.log(person)
-                res.json(person)
+app.delete('/api/persons/:id', function(req, res, next) {
+    Person.findByIdAndDelete(req.params.id)
+        .then(deletedPerson => {
+            if (deletedPerson) {
+                res.status(204).end()
             } else {
                 res.status(404).end()
             }
