@@ -35,7 +35,7 @@ app.delete('/api/persons/:id', function(req, res, next) {
         .catch(error => next(error))
 })
 
-app.put('api/persons/:id', function(req, res) {
+app.put('/api/persons/:id', function(req, res) {
     console.log(req)
 })
 
