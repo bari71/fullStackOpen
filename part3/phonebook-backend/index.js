@@ -6,15 +6,14 @@ const Person = require('./models/person')
 const password = process.argv[2]
 
 const app = express()
+
 app.use(cors())
 app.use(express.static('dist'))
-
 app.use(express.json())
 app.use(morgan('tiny'))
 
 app.get('/api/persons', (req, res) => {
     Person.find({}).then(results => {
-        console.log(results)
         res.json(results)
     })
 })
@@ -36,14 +35,9 @@ app.delete('/api/persons/:id', function(req, res, next) {
         .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', function(req, res, next) {
-    Person.findByIdAndDelete(request.params.id)
-        .then(res => {
-            res.status(204).end()
-        })
-        .catch(error => next(error))
+app.put('api/persons/:id', function(req, res) {
+    console.log(req)
 })
-
 
 app.post('/api/persons', function(req, res) {
     const body = req.body
@@ -91,6 +85,7 @@ const errorHandler = (error, req, res, next) => {
 
     next(error)
 }
+
 app.use(errorHandler)
 const PORT = process.env.PORT
 app.listen(PORT, () => {
