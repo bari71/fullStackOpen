@@ -53,13 +53,8 @@ app.put('/api/persons/:id', function(req, res) {
         .catch(error => next(error))
 })
 
-app.post('/api/persons', function(req, res) {
+app.post('/api/persons', function(req, res, next) {
     const body = req.body
-    if (!body.name || !body.number) {
-        return res.status(400).json({
-            error: 'name/number missing'
-        })
-    }
     // if (checkNameExists(body.name)) {
     //    return res.status(400).json({
     //        error: 'Name already exists in phonebook'
@@ -69,9 +64,11 @@ app.post('/api/persons', function(req, res) {
         name: body.name,
         number: body.number
     })
-    person.save().then(savedPerson => {
+    person.save()
+        .then(savedPerson => {
         res.json(savedPerson)
-    })
+        })
+        .catch(error => next(error))
 })
 
 const checkNameExists = (name) => {
@@ -95,6 +92,8 @@ const errorHandler = (error, req, res, next) => {
     console.error(error.message)
     if (error.name === 'CastError') {
         return res.status(400).send({ error: 'malformed id'})
+    } else if (error.name === 'ValidationError') {
+        return res.status(400).json({ error: error.message })
     }
 
     next(error)
