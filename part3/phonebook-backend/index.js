@@ -36,7 +36,8 @@ app.delete('/api/persons/:id', function(req, res, next) {
 })
 
 app.put('/api/persons/:id', function(req, res) {
-    console.log(req.params.id)
+    console.log(req.body)
+    Person.findByIdAndUpdate(req.params.id, { number: req.body.number})
 })
 
 app.post('/api/persons', function(req, res) {
