@@ -20,7 +20,7 @@ app.get('/api/persons', (req, res) => {
 
 app.get('/info', (req, res) => {
     const currTime = new Date()
-    res.send(`Phonebook has info for ${persons.length} people<br/>${currTime}`)
+    res.send(`Phonebook has info for ${Person.countDocuments({})} people<br/>${currTime}`)
 })
 
 app.delete('/api/persons/:id', function(req, res, next) {
