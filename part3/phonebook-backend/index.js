@@ -20,7 +20,10 @@ app.get('/api/persons', (req, res) => {
 
 app.get('/info', (req, res) => {
     const currTime = new Date()
-    res.send(`Phonebook has info for ${Person.countDocuments({})} people<br/>${currTime}`)
+    Person.countDocuments({})
+        .then(result => {
+            res.send(`Phonebook has info for ${result} people<br/>${currTime}`)
+        })
 })
 
 app.delete('/api/persons/:id', function(req, res, next) {
@@ -36,7 +39,6 @@ app.delete('/api/persons/:id', function(req, res, next) {
 })
 
 app.put('/api/persons/:id', function(req, res) {
-    console.log(req.body)
     Person.findByIdAndUpdate(req.params.id, { number: req.body.number})
         .then(updatedPerson => {
             res.json(updatedPerson)
