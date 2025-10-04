@@ -36,7 +36,7 @@ app.delete('/api/persons/:id', function(req, res, next) {
 })
 
 app.put('/api/persons/:id', function(req, res) {
-    console.log(req)
+    console.log(req.params.id)
 })
 
 app.post('/api/persons', function(req, res) {
