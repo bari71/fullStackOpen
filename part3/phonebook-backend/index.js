@@ -18,6 +18,13 @@ app.get('/api/persons', (req, res) => {
     })
 })
 
+app.get('/api/persons/:id', (req, res) => {
+    Person.findById(req.params.id)
+        .then(personObj => {
+            res.json(personObj)
+        })
+})
+
 app.get('/info', (req, res) => {
     const currTime = new Date()
     Person.countDocuments({})
