@@ -38,6 +38,10 @@ app.delete('/api/persons/:id', function(req, res, next) {
 app.put('/api/persons/:id', function(req, res) {
     console.log(req.body)
     Person.findByIdAndUpdate(req.params.id, { number: req.body.number})
+        .then(updatedPerson => {
+            res.json(updatedPerson)
+        })
+        .catch(error => next(error))
 })
 
 app.post('/api/persons', function(req, res) {
