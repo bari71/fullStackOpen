@@ -1,7 +1,7 @@
-PUT https://phonebook-mo1a.onrender.com/api/persons/68e045ada3c3b76f8355cf07
+PUT http://localhost:3001/api/persons/68e04f75f7a4e8fe662d1cd6
 Content-Type: application/json
 
 {
-    "name": "Sasssh",
-    "number": "0444444447"
+    "name": "amm",
+    "number": "02352352357"
 }

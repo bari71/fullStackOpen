@@ -45,57 +45,43 @@ app.delete('/api/persons/:id', function(req, res, next) {
         .catch(error => next(error))
 })
 
-app.put('/api/persons/:id', function(req, res) {
-    Person.findByIdAndUpdate(req.params.id, { number: req.body.number})
-        .then(updatedPerson => {
-            res.json(updatedPerson)
-        })
-        .catch(error => next(error))
+app.put('/api/persons/:id', (req, res, next) => {
+  const { name, number } = req.body
+
+  Person.findByIdAndUpdate(
+    req.params.id,
+    { name, number },
+    {
+      new: true,
+      runValidators: true,
+      context: 'query'
+    }
+  )
+    .then(updatedPerson => {
+      res.json(updatedPerson)
+    })
+    .catch(error => next(error))
 })
 
 app.post('/api/persons', function(req, res, next) {
     const body = req.body
-    // if (checkNameExists(body.name)) {
-    //    return res.status(400).json({
-    //        error: 'Name already exists in phonebook'
-    //    })
-    //}
     const person = new Person({
         name: body.name,
         number: body.number
     })
     person.save()
         .then(savedPerson => {
-        res.json(savedPerson)
+            res.json(savedPerson)
         })
         .catch(error => next(error))
 })
 
-const checkNameExists = (name) => {
-    return persons.find(function(p) {
-        if (p.name.toLocaleLowerCase() === name.toLocaleLowerCase()) {
-            return true
-        } else {
-            return false
-        }
-    })
-}
-
-const findMaxNum = () => {
-    const maxNum = persons.length > 0
-        ? Math.max(...persons.map(p => Number(p.id)))
-        : 0
-    return (String(maxNum + 1))
-}
-
 const errorHandler = (error, req, res, next) => {
-    console.log(error.message)
     if (error.name === 'CastError') {
         return res.status(400).send({ error: 'malformed id'})
     } else if (error.name === 'ValidationError') {
         return res.status(400).json({ error: error.message })
     }
-
     next(error)
 }
 
