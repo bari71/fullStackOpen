@@ -1,5 +1,5 @@
 import axios from "axios"
-import personService from '../services/notes'
+import personService from '../services/persons'
 
 const Persons = ({ matchedPersons, allPersons, setAllPersons }) => {
     const handleDeletePerson = (id, name) => {

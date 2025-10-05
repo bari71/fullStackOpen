@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import personService from './services/notes'
+import personService from './services/persons'
 import Notification from './components/Notification'
 
 const App = () => {
@@ -47,7 +47,7 @@ const App = () => {
         displayNotifications(`Added ${newName}`, 'success')
       })
       .catch(error => {
-        setErrorMessage(`Information about ${newName} has already been removed from the server`)
+        displayNotifications(error.response.data.error, 'error')
       })
   }
 
@@ -63,7 +63,7 @@ const App = () => {
         displayNotifications(`Updated ${newName}'s number to ${newNumber}`, 'success')
       })
       .catch(error => {
-        displayNotifications(`Information about ${newName} has already been removed from the server`, 'error')
+        displayNotifications(error.response.data.error, 'error')
       })
   }
 
