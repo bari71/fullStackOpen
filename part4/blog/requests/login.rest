@@ -1,0 +1,78 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "newUser1",
+    "name": "new user 1",
+    "password": "helloThere"
+}
+
+###
+
+post http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+    "username": "newUser1",
+    "password": "helloThere"
+}
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld1VzZXIxIiwiaWQiOiI2OGU3MmNlNTE3ZWQ0ZmRmZmI3ZDY0MjUiLCJpYXQiOjE3NTk5ODQ1NTZ9.4MbGMJc-vp3Dfko8gcdR8FCDqytMnU1joFyKpAJx6_Y
+
+{
+    "title": "How to make cookies part 100 ",
+    "author": "Annur Bari 9",
+    "url": "www.google.com",
+    "likes": 29
+}
+
+###
+
+DELETE http://localhost:3003/api/blogs/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld1VzZXIxIiwiaWQiOiI2OGU3MmNlNTE3ZWQ0ZmRmZmI3ZDY0MjUiLCJpYXQiOjE3NTk5ODA3Nzd9.L4eU-uTGCNIgB_3OoM1vQOgYDMo4_IubtAv36GpailA
+
+###
+
+
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "newUser2",
+    "name": "new user 2",
+    "password": "helloThere"
+}
+
+###
+
+post http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+    "username": "newUser2",
+    "password": "helloThere"
+}
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld1VzZXIyIiwiaWQiOiI2OGU3M2FmMjRiYjZhZDg0MDNkNzk1NmQiLCJpYXQiOjE3NTk5ODQ2MTl9.zgsigNZjf9iAH0hUfSCxeGcLsxMxJ5QkEuh9aBCRnpA
+
+{
+    "title": "How to make cookies part 10 ",
+    "author": "Annur Bari 9",
+    "url": "www.google.com",
+    "likes": 29
+}
+
+###
+
+DELETE http://localhost:3003/api/blogs/68e73e6feee5444133097981
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld1VzZXIyIiwiaWQiOiI2OGU3M2FmMjRiYjZhZDg0MDNkNzk1NmQiLCJpYXQiOjE3NTk5ODUyNzB9.lyjRM3MKRWzW4ckEdyIFooFq-R4tO8mmXjeG2aqsh2A
